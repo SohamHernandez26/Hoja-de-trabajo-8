@@ -68,9 +68,39 @@ def escenario_B():
     pass
 
 def escenario_C():
-    # después lo haremos
-    pass
+        # 1. Crear procesos aleatorios
+    procesos = [Proceso(i, random.randint(1, 10000)) for i in range(1000)]
 
+    # 2. Crear árboles
+    splay = SplayTree()
+    rb = RedBlackTree()
+
+    for p in procesos:
+        splay.insert(p)
+        rb.insert(p)
+
+    # 3. Elegir UN proceso aleatorio
+    objetivo = random.choice(procesos)
+
+    pasos_splay = []
+    pasos_rb = []
+
+    # 4. Buscarlo 50 veces
+    for _ in range(50):
+        _, a = splay.search(objetivo.vruntime)
+        _, b = rb.search(objetivo.vruntime)
+
+        pasos_splay.append(a)
+        pasos_rb.append(b)
+
+    # 5. Promedios
+    promedio_splay = sum(pasos_splay) / 50
+    promedio_rb = sum(pasos_rb) / 50
+
+    print("\nEscenario C:")
+    print("Proceso buscado:", objetivo.vruntime)
+    print("Splay promedio:", promedio_splay)
+    print("Red-Black promedio:", promedio_rb)
 
 if __name__ == "_main_":
     escenario_A()
