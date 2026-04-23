@@ -1,3 +1,4 @@
+from graphviz import Digraph
 import random
 from Proceso import Proceso
 from BST import BST
@@ -102,6 +103,38 @@ def escenario_C():
     print("Splay promedio:", promedio_splay)
     print("Red-Black promedio:", promedio_rb)
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     escenario_A()
     escenario_B()
+    escenario_C()
+
+
+def graficar_arbol(nodo, dot=None):
+    if dot is None:
+        dot = Digraph()
+
+    if nodo:
+        label = str(nodo.proceso.vruntime)
+        dot.node(label)
+
+        if nodo.left:
+            dot.edge(label, str(nodo.left.proceso.vruntime))
+            graficar_arbol(nodo.left, dot)
+
+        if nodo.right:
+            dot.edge(label, str(nodo.right.proceso.vruntime))
+            graficar_arbol(nodo.right, dot)
+
+    return dot
+
+# Graficar BST
+dot = graficar_arbol(BST.root)
+dot.render("bst_tree", format="png")
+
+# Graficar Splay
+dot = graficar_arbol(SplayTree.root)
+dot.render("splay_tree", format="png")
+
+# Graficar Red-Black
+dot = graficar_arbol(RedBlackTree.root)
+dot.render("rb_tree", format="png")
