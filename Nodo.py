@@ -5,4 +5,4 @@ class Nodo:
         self.right = None
         self.parent = None
         
-        self.color = "red"
+        self.color = 1
