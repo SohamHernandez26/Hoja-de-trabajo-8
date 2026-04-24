@@ -1,5 +1,5 @@
-from nodo import Nodo
-from proceso import Proceso
+from Nodo import Nodo
+from Proceso import Proceso
 
 class RedBlackTree:
     def __init__(self):
